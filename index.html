@@ -28,16 +28,54 @@
             height: 200px;
 
         }
+
+        .pelota1 {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: red;
+            transition: width 1s 25ms ease, height 1s 250ms ease;
+            /* para que los elementos se ubiquen uno encima del otro */
+            position: absolute;
+        }    
+
+        /* para que hacer que se muevan a direcciones diferentes, necesitamos dos pelotas */
+        .pelota1.a{
+
+        }
+
+        .pelota1.b{
+
+        }
+
+        /* se crea canasta que es superior a pelota1 para que tenga la animacion y las pelotas lo hereden */
+        .canasta:hover .pelota1{
+            width: 200px;
+            height: 200px;
+        }
+        
+        /* para ver en que parte es accionable la canasta */
+        .canasta{
+            border: 1px solid red;
+            
+            /* ya que quiero que los elementos esten bailando pero dentro de la canasta */
+            position: relative;
+
+            /* le ponemos alto a la canasta ya que el ancho ya lo tiene definido, de lo contrario es solo una linea */
+            height: 200px; 
+        }
+
+
     </style>
 </head>
 <body>
     <h1>Pelota</h1>
     <div class="pelota"></div>
 
-    <h1>Pelota en canasta</h1>
+    <h1>Pelotas en canasta</h1>
     <div class="canasta">
-        <div class="pelota"></div>
-        <div class="pelota "></div>
+        <div class="pelota1"></div>
+        <div class="pelota1"></div>
     </div>
 </body>
 </html>
