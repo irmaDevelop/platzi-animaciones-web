@@ -6,6 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Transiciones CSS</title>
     <style>
+        body{
+            
+            /* display: flex;
+            height: 100vh;
+            justify-content: center;
+            align-items: center; */
+
+        }
+
         .pelota {
             width: 100px;
             height: 100px;
@@ -33,25 +42,43 @@
             width: 100px;
             height: 100px;
             border-radius: 50%;
-            background-color: red;
-            transition: width 1s 25ms ease, height 1s 250ms ease;
+            /* background-color: red; */
+            /* transition: width 1s 25ms ease, height 1s 250ms ease; */
             /* para que los elementos se ubiquen uno encima del otro */
+            transition: 1s; 
             position: absolute;
+
+            /* los siguiente es para que el texto de las pelotas se centre y tenga color blanco*/
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color:white;
+
         }    
 
         /* para que hacer que se muevan a direcciones diferentes, necesitamos dos pelotas */
         .pelota1.a{
             background: red;
+            left: 0;
         }
 
         .pelota1.b{
             background: blue;
+            right:0;
         }
 
         /* se crea canasta que es superior a pelota1 para que tenga la animacion y las pelotas lo hereden */
-        .canasta:hover .pelota1{
-            width: 200px;
-            height: 200px;
+        .canasta:hover .pelota1.a{
+            /* left: 200px; */
+            /* hacemos calculo para que no se crucen las pelotas  */
+            left: calc(50% - 100px);
+            background:violet;
+        }
+
+        .canasta:hover .pelota1.b{
+            /* right: 200px; */
+            right: calc(50% - 100px);
+            background:turquoise;
         }
         
         /* para ver en que parte es accionable la canasta */
@@ -62,20 +89,125 @@
             position: relative;
 
             /* le ponemos alto a la canasta ya que el ancho ya lo tiene definido, de lo contrario es solo una linea */
-            height: 200px; 
+            height: 100px; 
+
+            /* transform: rotar | sesgar | posicion | tamaño */
+            transform: rotate(5deg) skew(10deg) translate(100px) scale(.5)
         }
 
+        /* codigo para la parte de TRANSFORMACION ROTACION */
+        
+        /* body{
+            display:flex;
+            align-content: center;
+            justify-content: center;
+            height: 100vh;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+        } */
+
+
+        .container, .container-traslacion, .container-scale{
+            border: 1px solid red;
+            width: 240px;
+            height: 240px;
+            position: relative;
+            left: 300px;
+        }
+        
+        /* es una buena practicar aplicar el transform al contenedor del objeto */
+        /* y no al objeto en si */
+
+        .container:hover .cuadrado{
+        /* .cuadrado:hover{ */
+            /* transform: rotateX(-360deg); */
+            /* transform: rotateY(-360deg); */
+
+            /* rotateZ es igual a solo rotate */
+            /* transform: rotateZ(-360deg); */
+            
+            /* transform: rotateX(45deg) rotateY(45deg) rotateZ(45deg); */
+            
+            /* lo mismo que la linea anterior se consigue con: */
+            /* transform: rotate3d(1, 0, 0, 45deg); */
+            /* transform: rotate3d(0, 1, 0, 45deg); */
+            /* transform: rotate3d(0, 0, 1, 45deg); */
+            transform: rotate3d(0, 0, 1, 45deg);
+
+            
+
+            /* transform: rotate(-360deg); */
+            /* transform: rotate(45deg); */
+        }
+
+        .container-traslacion:hover .cuadrado{
+            /* transform: translate(-100px); */
+            /* transform: translate(80px, 80px); */
+            /* transform: translateX(100px); */
+            /* transform: translateY(100px);  */
+
+            /* para el caso del translateZ, no se vera el efecto hasta 
+            que configuremos, puede ser el body, la opcion de perspective */
+            /* transform: translateZ(50px);  */
+
+            /* transform: translate3d(x, y, z);  */
+            /* transform: translate3d(10px, 10px, 10px);  */
+
+            transform: translate3d(-10px, -10px, -100px); 
+            
+            /* NOTA:
+            en firefox agregar transform-style: preserve-3d; al padre del objeto a mover */
+        }
+
+        .container-scale:hover .cuadrado{
+
+            /* transform: scales(x, y);  */
+            /* la siguiente linea hace que el elemento duplique su tamaño */
+            transform: scale(2); 
+    
+        }
+
+
+        .cuadrado{
+            width: 200px;
+            height: 200px;
+            background: #7dc900;
+            margin: 20px;
+            transition: 1s;
+        }
 
     </style>
 </head>
 <body>
-    <h1>Pelota</h1>
-    <div class="pelota"></div>
 
-    <h1>Pelotas en canasta</h1>
-    <div class="canasta">
-        <div class="pelota1"></div>
-        <div class="pelota1"></div>
+    <h3>Transformacion de escala</h3>
+    <div class="container-scale">
+        <div class="cuadrado">
+            Hola Mundo!
+        </div>
     </div>
+
+    <h3>Transformacion traslacion</h3>
+    <div class="container-traslacion">
+        <div class="cuadrado">
+            Hola Mundo!
+        </div>
+    </div>
+
+    <h3>Transformacion rotación</h3>
+    <div class="container">
+        <div class="cuadrado">
+            Hola Mundo!
+        </div>
+    </div>
+    
+    <h3>Pelotas en canasta</h3>
+    <div class="canasta">
+        <div class="pelota1 a">Hola</div>
+        <div class="pelota1 b">Mundo</div>
+    </div>
+    
+    <h3>Pelota</h3>
+    <div class="pelota"></div>
 </body>
 </html>
