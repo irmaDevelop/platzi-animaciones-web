@@ -107,7 +107,7 @@
         } */
 
 
-        .container, .container-traslacion, .container-scale{
+        .container, .container-traslacion, .container-scale, .container-skew, .container-origin{
             border: 1px solid red;
             width: 240px;
             height: 240px;
@@ -161,13 +161,47 @@
 
         .container-scale:hover .cuadrado{
 
-            /* transform: scales(x, y);  */
+            /* transform: scales(ancho, alto);  */
             /* la siguiente linea hace que el elemento duplique su tamaño */
-            transform: scale(2); 
-    
+            /* transform: scale(2);  */
+            /* transform: scale(.5);  */
+            transform: scale(2, .5); 
+            /* transform: scale3d(1.5, .5, 1.7);  */
+
+            /* IMPORTANTE:  Al escalarse no pierde resolucion, es imagen vectorial */
         }
 
+        .container-skew:hover .cuadrado{
+            /* transform: skew(x, y); */
+            /* transform: skew(45deg); */
+            /* transform: skew(45deg, 45deg); */
+            transform: skew(20deg, 20deg);
+        }
 
+        .container-origin:hover .cuadrado{
+            /* transform-origin: top;  */
+            /* transform-origin: 50% 0%;  */
+            /* transform-origin: bottom; */
+            /* transform-origin: 50% 100%;  */
+            /* transform: rotateX(45deg); */
+
+            /* transform-origin: left; */
+            /* transform-origin: 0% 50%; */
+            /* transform-origin: right; */
+            /* transform-origin: 100% 50%; */
+            /* transform-origin: 75% 20%; */
+            /* transform: rotateY(45deg); */
+
+            /* transform-origin: left top;  */
+            /* transform-origin: right top; */
+            /* transform-origin: left bottom; */
+            /* transform-origin: right bottom; */
+            transform-origin: 120% 180%;
+
+            /* transform: rotateZ(45deg);   */
+            transform: rotateZ(-360deg);   
+
+        }
         .cuadrado{
             width: 200px;
             height: 200px;
@@ -179,6 +213,21 @@
     </style>
 </head>
 <body>
+
+    <h3>Transformacion punto de Origen</h3>
+    <div class="container-origin">
+        <div class="cuadrado">
+            Hola Mundo!
+        </div>
+    </div>
+
+
+    <h3>Transformacion de Sesgado</h3>
+    <div class="container-skew">
+        <div class="cuadrado">
+            Hola Mundo!
+        </div>
+    </div>
 
     <h3>Transformacion de escala</h3>
     <div class="container-scale">
