@@ -308,7 +308,7 @@
             animation-name: cuadrado, rebote; 
             
             /* si no se establece ua segunda duracion se asume la que este configurada */
-            animation-duration: 2s, .3s;
+            animation-duration: 3s, .3s;
 
             /* mas propiedades */
             animation-delay: 1s;
@@ -327,7 +327,7 @@
             /* animation-timing-function: ease-in-out; */
 
             /* la animacion es la misma en todo el tiempo de la animacion */
-            /* animation-timing-function: linear; */
+            animation-timing-function: linear ease-in-out;
 
             /* #### TRUCO aumentar o disminuir cuadros o pasos #### */
             /* animation-timing-function: steps(5); */
@@ -375,7 +375,8 @@
             }
             /* 100% */
             to{
-                transform: translateY(100px);
+                /* para que se achate al caer usamos scale */
+                transform: translateY(100px) scale(1.1, 0.8);
             }
         }
     </style>
