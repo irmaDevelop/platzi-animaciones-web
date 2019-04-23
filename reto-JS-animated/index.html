@@ -13,9 +13,12 @@
             justify-content: center;
         }
         .container{
-            /* height: auto; */
+            height: inherit; 
             width: 600px;
             border: 1px solid red;
+            display: flex;
+            align-items:flex-end;
+            justify-content:last center;
         }
         .pelota{
             width: 100px;
@@ -43,6 +46,13 @@
             transition: .2s;
             will-change: transform;
         }
+
+        .directions{
+            background: #84d2ee;
+            position: relative;
+            bottom: 300px;
+            left: -150px;
+        }
         
         /* cuando sea active el boton, tenga una transformacion */
         .btn:active{
@@ -63,6 +73,10 @@
             <button class="btn" id="pause">Pause</button>
             <button class="btn" id="stop">Stop</button>
             <button class="btn" id="reverse">Reverse</button>
+            <button class="btn directions" id="right">⇨</button>
+            <button class="btn directions" id="up">⇧</button>
+            <button class="btn directions" id="down">⇩</button>
+            <button class="btn directions" id="left">⇦</button>
         </div>
     </div>
     <script>
@@ -100,6 +114,10 @@
         const $pauseButton = document.getElementById('pause');
         const $stopButton = document.getElementById('stop');
         const $reverseButton = document.getElementById('reverse');
+        const $upButton = document.getElementById('up');
+        const $downButton = document.getElementById('down');
+        const $rightButton = document.getElementById('right');
+        const $leftButton = document.getElementById('left');
         
         $playButton.addEventListener('click', (event)=>{
             animation.play();
