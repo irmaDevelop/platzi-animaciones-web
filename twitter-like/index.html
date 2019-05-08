@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Twitter Like</title>
+    <style>
+        body{
+            display: flex;
+            height: 100vh;
+            margin:0;
+            align-items: center;
+            justify-content: center;
+        }
+        .like {
+            cursor: pointer;
+            /* width: 100px;
+            height: 100px; */
+            width: 50px;
+            height: 50px;
+            /* background: red; */
+            background-image: url('corazon.png');
+            /* para que la imagen de fondo se ajuste */
+            background-size: 1450px 50px;
+        }
+        .like.is-liked{
+            animation-name: like;
+            animation-duration: .8s;
+            /* ancho de imagen 2900/29 = 100px */
+
+            /* hace que la animacion de traslacion se de solo en cinco pasos */
+            animation-timing-function: steps(28);
+            /* background-position: -2800px 0; */
+            /* es lo mismo que: */
+            background-position: right;
+            /* right ayuda tambien para que sea responsive */
+
+        }
+
+        @keyframes like{
+            0%{
+                /* transform: translateX(0); */
+                background-position: 0 0;
+            }
+            100%{
+                /* transform: translateX(200px); */
+                /* background-position: -2800px 0; */
+                /* se le quito 100px por que los pasos bajaron de 29 a 28 */
+                /* background-position: right;; */
+                /* tambien es lo mismo que decirle que se quede en su estado final: */
+                animation-fill-mode: forwards;
+            }
+        }
+    
+    </style>
+</head>
+<body>
+    <div class="tweet-box">
+        <div class="like" id="like"></div>
+    </div>
+    <script>
+        const $like =document.getElementById('like');
+        $like.addEventListener('click',(event)=>{
+            // console.log(event);
+
+            // $like.classList.add('is-liked');
+            // pero toggle es mejor, ya que agrega y quita la clase
+            $like.classList.toggle('is-liked');
+        })
+    </script>
+</body>
+</html>
