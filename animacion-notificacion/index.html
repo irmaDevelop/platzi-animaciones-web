@@ -5,10 +5,178 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Notificacion</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- la ruta anterior la obtuvo buscando font-awesome en https://cdnjs.com/ -->
+    <style>
+        body{
+            background: url('platzi.png');
+            background-size: 100%;
+            height: 200vh;
+            margin: 0;
+        }
+        .header{
+            background: #1d3644;
+            height: 52px;
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 200px;
+        }
+        
+        .notification{
+            /* color a la campanita */
+            color: white;
+            width: 50px;
+            height: inherit;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            position: relative;
+            
+            /* Aqui hacen que tanto la campana como econtador giren */
+            /* animation-name: bell;
+            animation-duration: 1s;
+            animation-iteration-count: infinite; */
+        }
+
+
+        .notification::before{
+            /* fuente que corresponde a la campanita */
+            content: "\f0f3";
+            font-family: "FontAwesome";
+            display: block;
+            transform-origin: center top; 
+            /* las tres lineas van a otra clase para agregarse mediante js */
+            /* animation-name: bell;
+            animation-duration: 1s;
+            animation-timing-function: ease-out; */
+            /* ease-out hace que el terminar de la animacio sea mas lenta */
+            /* animation-iteration-count: infinite; */
+        }
+        .notification.notify::before{
+            /* before por que vamos a animar la campana */
+            animation-name: bell;
+            animation-duration: 1s;
+            animation-timing-function: ease-out;
+        }
+        @keyframes bell{
+            /* para simular pendulo jugar entre positivo y negativo */
+            0%{
+                transform: rotate(35deg);
+            }
+            12.5%{
+                transform: rotate(-30deg)
+            }
+            25%{
+                transform: rotate(25deg);
+            }
+            37.6%{
+                transform: rotate(-20deg);
+            }
+            50%{
+                transform: rotate(15deg);
+            }
+            62.5%{
+                transform: rotate(-10deg);
+            }
+            75%{
+                transform: rotate(5deg);
+            }
+            100%{
+                transform: rotate(0deg);
+            }
+        }
+        .notification:after{
+            content: "1";
+            font-size: 11px;
+            font-weight: bold;
+            
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            min-width: 14px;
+            height: 14px;
+
+            background: #ff4600;
+            border-radius: 50%;
+
+            font-family: Arial;
+            position: absolute;
+
+            /* top: 0;
+            right: 0; */
+
+            /* hasta aqui el 1 se va hasta la esquina de la ventana */
+            /* hace falta agregar position al elemento que lo contiene */
+            /* en este caso es notification */
+            top: 5px;
+            right: 5px;
+            content: attr(data-count);
+            opacity: 0;
+           
+            transform: scale(.5);
+            transition: .3s;
+            will-change: opacity, transform;
+        }
+        
+        .notification.show-count:after{
+            opacity:1;
+            transform: scale(1);
+        }
+        .btn {
+            text-align: center;
+            padding: .6em .8em .8em;
+            border: none;
+            color: white;
+            background: lightgray;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: inset 0 -.2em rgba(0,0,0, .2);
+            outline: 0;
+            transition: .2s;
+            will-change: transform;
+
+        }
+
+        .btn.primary{
+            background: #7dc800;
+        }
+
+        .btn.warning{
+            background: #ff463b;
+        }
+        
+        .btn:active{
+            transform:scale(.9)
+        }
+
+    </style>
 </head>
 <body>
-        
+    <header class="header">
+        <button class="btn primary" id="button">Enviar Notificacion</button>
+        <div class="notification" id="notification">
+    
+        </div>
+    </header>
+    <script>
+        const $button = document.getElementById('button');
+        const $bell = document.getElementById('notification');
+        $button.addEventListener('click', function(){
+            // si el atributo no devuelve valor le ponga 0 por defecto
+            const count = Number($bell.getAttribute('data-count')) || 0;
+            $bell.setAttribute('data-count', count + 1);
+            $bell.classList.add('show-count');
+            $bell.classList.add('notify');
+        });
+        // ya que la campana se anima solo al primer Clic 
+        // debemos quitar la clase notify al detectar:
+        $bell.addEventListener('animationend',function(){
+            $bell.classList.remove('notify');
+        });
+    </script>
 </body>
 </html>
